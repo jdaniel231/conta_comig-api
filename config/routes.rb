@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :home
       resources :categories
 
+      resources :accounts
 
       # resources :users, only: [:create, :show, :update, :destroy]
     end
