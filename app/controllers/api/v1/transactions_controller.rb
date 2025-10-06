@@ -5,7 +5,20 @@ class Api::V1::TransactionsController < ApplicationController
 
   def index
     @transactions = Transaction.where(user_id: current_user.id)
-    render json: @transactions
+                        .page(params[:page])
+                        .per(params[:per_page] || 25)
+
+
+    render json: {
+      transactions: @transactions,
+      meta: {
+        current_page: @transactions.current_page,
+        next_page: @transactions.next_page,
+        prev_page: @transactions.prev_page,
+        total_pages: @transactions.total_pages,
+        total_count: @transactions.total_count
+      }
+    }
   end
 
   def show
