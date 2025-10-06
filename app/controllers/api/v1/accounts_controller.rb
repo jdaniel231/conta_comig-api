@@ -4,7 +4,19 @@ class Api::V1::AccountsController < ApplicationController
 
   def index
     @accounts = Account.where(user_id: current_user.id)
-    render json: @accounts
+                       .page(params[:page])
+                       .per(params[:per_page] || 25)
+
+    render json:{
+      accounts: @accounts,
+      meta: {
+        current_page: @accounts.current_page,
+        next_page: @accounts.next_page,
+        prev_page: @accounts.prev_page,
+        total_pages: @accounts.total_pages,
+        total_count: @accounts.total_count
+      }
+    } 
   end
 
   def show
