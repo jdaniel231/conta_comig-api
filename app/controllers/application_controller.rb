@@ -1,5 +1,9 @@
 class ApplicationController < ActionController::API
 
+  attr_reader :current_user
+
+  private
+
   def authenticate_request
     header = request.headers['Authorization']
     token = header.split(' ').last if header
