@@ -33,15 +33,15 @@ class Api::V1::AccountsController < ApplicationController
     end
   end
  
-   def update
+  def update
     if @account.update(account_params)
       render json: @account
     else
       render json: @account.errors, status: :unprocessable_entity
     end
   end
-    
-     def destroy
+      
+  def destroy
     @account = Account.find(params[:id])
     @account.destroy
     render json: @account

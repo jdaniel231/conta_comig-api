@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
       resources :accounts
       resources :transactions
+      resources :payment_methods
 
       # resources :users, only: [:create, :show, :update, :destroy]
     end
