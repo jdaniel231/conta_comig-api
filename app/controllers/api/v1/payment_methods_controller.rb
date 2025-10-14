@@ -1,7 +1,7 @@
 class Api::V1::PaymentMethodsController < ApplicationController
   
   before_action :authenticate_request
-  before_action :set_payment_type, only: [:show, :update, :destroy]
+  before_action :set_payment_method, only: [:show, :update, :destroy]
 
   def index
     @payment_methods = PaymentMethod.where(user_id: current_user.id)
@@ -30,7 +30,7 @@ class Api::V1::PaymentMethodsController < ApplicationController
     end
   end
 
-   def destroy
+  def destroy
     @payment_method = PaymentMethod.find(params[:id])
     @payment_method.destroy
     render json: @payment_method
